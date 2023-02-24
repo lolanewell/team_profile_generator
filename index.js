@@ -12,6 +12,40 @@ const render = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+function createManager(team) {
+    inquirer.prompt([
+        // Manager name
+        // Manager id
+        // Manager email
+        // Manager office number (phone number)
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the team manager's name?",
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the team manager's ID?",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the team manager's email?",
+        },
+        {
+            type: 'input',
+            name: 'office number',
+            message: "What is the team manager's phone number?",
+        },
+    ]).then((managerDetails) => {
+        // Initialise Manager class to create Manager object
+        const manager = new Manager(managerDetails.name, managerDetails.id, managerDetails.email, managerDetails.officeNumber)
+        team.push(manager);
+
+        createTeam(team); // at this point, team array have a manager in it
+    });
+};
 
 function createEngineer(team) {
     inquirer.prompt([
@@ -23,14 +57,31 @@ function createEngineer(team) {
             type: 'input',
             name: 'name',
             message: "What is the engineer's name?",
-        }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the engineer's ID?",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the engineer's email?",
+        },
+        {
+            type: 'input',
+            name: 'GitHub',
+            message: "What is the engineer's GitHub?",
+        },
+       
     ]).then((engineerDetails) => {
         // Initialise Engineer class to create Manager object
-        // const engineer = new Engineer(engineerDetails.name, engineerDetails.id, engineerDetails.email, engineerDetails.githubUsername)
-        // team.push(engineer);
+        const engineer = new Engineer(engineerDetails.name, engineerDetails.id, engineerDetails.email, engineerDetails.githubUsername)
+        team.push(engineer);
+
         createTeam(team); // at this point we add an engineer to the team array
     });
-}
+};
 
 function createIntern(team) {
     inquirer.prompt([
@@ -42,14 +93,30 @@ function createIntern(team) {
             type: 'input',
             name: 'name',
             message: "What is the intern's name?",
-        }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the intern's ID?",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the intern's email?",
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "What is the intern's school?",
+        },
     ]).then((internDetails) => {
         // Initialise Intern class to create Manager object
-        // const intern = new Intern(internDetails.name, internDetails.id, internDetails.email, internDetails.school)
-        // team.push(intern);
+        const intern = new Intern(internDetails.name, internDetails.id, internDetails.email, internDetails.school)
+        team.push(intern);
+
         createTeam(team); // at this point we add an intern to the team array
     });
-}
+};
 
 function createTeam(team) {
     inquirer.prompt([
@@ -78,25 +145,6 @@ function createTeam(team) {
                 }
             });
         }
-    });
-}
-
-function createManager(team) {
-    inquirer.prompt([
-        // Manager name
-        // Manager id
-        // Manager email
-        // Manager office number (phone number)
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the team manager's name?",
-        }
-    ]).then((managerDetails) => {
-        // Initialise Manager class to create Manager object
-        // const manager = new Manager(managerDetails.name, managerDetails.id, managerDetails.email, managerDetails.officeNumber)
-        // team.push(manager);
-        createTeam(team); // at this point, team array have a manager in it
     });
 }
 
